@@ -15,7 +15,7 @@
 
 
         <q-btn label="inicio" icon="home" to="/" flat />
-        <q-btn label="login" class="q-mx-sm" @click="userStore.access" v-if="!userStore.token" color="positive" />
+        <q-btn label="login" class="q-mx-sm" @click="accessUser" v-if="!userStore.token" color="positive" />
         <q-btn label="logout" class="q-mx-sm" @click="logout" v-if="userStore.token" color="negative" />
         <q-btn label="protected" to="/protected" v-if="userStore.token" color="orange" />
       </q-toolbar>
@@ -51,13 +51,18 @@ const router = useRouter();
 
 const leftDrawerOpen = ref(false);
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+const accessUser = async () => {
+  await userStore.access();
+  router.push("/")
 }
 
 const logout = async () => {
   await userStore.logout()
   router.push("/login");
+}
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
 const essentialLinks = [

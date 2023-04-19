@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import {useUserStore} from '../stores/user-store'
+import { useUserStore } from '../stores/user-store'
 
 const { token } = useUserStore();
 
